@@ -1,0 +1,1403 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>AAPL Options Data Analysis &#8212; Data Science CW2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'data_analysis/Aapl_options';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="AAPL Stock Data Analysis" href="Aapl_stock.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Data Science CW2 - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Data Science CW2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Data Science Coursework 2
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pipeline/intro.html">Intro to Data Pipelines used</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline/yfinance.html">YFinance Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline/market_data.html">Market Data pipeline</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Data analysis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Aapl_stock.html">AAPL Stock Data Analysis</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">AAPL Options Data Analysis</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/JackxTong/DS_CW2" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/data_analysis/Aapl_options.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>AAPL Options Data Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-data">Fetching data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implied-vol">Implied Vol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delta">Delta</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="aapl-options-data-analysis">
+<h1>AAPL Options Data Analysis<a class="headerlink" href="#aapl-options-data-analysis" title="Link to this heading">#</a></h1>
+<section id="fetching-data">
+<h2>Fetching data<a class="headerlink" href="#fetching-data" title="Link to this heading">#</a></h2>
+<p>Here I import relevant packages, and fetch AAPL call options data from “2023-01-01” to “2025-05-16”, using free data pipeline offered by <a class="reference external" href="https://www.marketdata.app/">market data</a></p>
+<p>I define a subscript at <code class="docutils literal notranslate"><span class="pre">scripts/fetch_options.py</span></code>. Running <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">scripts/fetch_options.py</span></code> will download the options data into the <code class="docutils literal notranslate"><span class="pre">option_data</span></code> folder. The following cell first checks if the csv has already been downloaded, if not it will run <code class="docutils literal notranslate"><span class="pre">scripts/fetch_options.py</span></code> to download:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load options</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">csv_path</span> <span class="o">=</span> <span class="s2">&quot;../option_data/options_AAPL.csv&quot;</span>
+
+<span class="c1"># Check if the file exists</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">csv_path</span><span class="si">}</span><span class="s2"> not found. Fetching data...&quot;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span> <span class="s2">&quot;../scripts/fetch_options.py&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading options data from CSV...&quot;</span><span class="p">)</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">)</span>
+<span class="n">options</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading options data from CSV...
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>optionSymbol</th>
+      <th>underlying</th>
+      <th>expiration</th>
+      <th>side</th>
+      <th>strike</th>
+      <th>firstTraded</th>
+      <th>dte</th>
+      <th>updated</th>
+      <th>bid</th>
+      <th>bidSize</th>
+      <th>...</th>
+      <th>volume</th>
+      <th>inTheMoney</th>
+      <th>intrinsicValue</th>
+      <th>extrinsicValue</th>
+      <th>underlyingPrice</th>
+      <th>iv</th>
+      <th>delta</th>
+      <th>gamma</th>
+      <th>theta</th>
+      <th>vega</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AAPL250516C00095000</td>
+      <td>AAPL</td>
+      <td>1747425600</td>
+      <td>call</td>
+      <td>95.0</td>
+      <td>1744119000</td>
+      <td>3</td>
+      <td>1746820800</td>
+      <td>102.75</td>
+      <td>105</td>
+      <td>...</td>
+      <td>0</td>
+      <td>True</td>
+      <td>103.53</td>
+      <td>0.005</td>
+      <td>198.53</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AAPL250516C00100000</td>
+      <td>AAPL</td>
+      <td>1747425600</td>
+      <td>call</td>
+      <td>100.0</td>
+      <td>1736260200</td>
+      <td>3</td>
+      <td>1746820800</td>
+      <td>97.95</td>
+      <td>105</td>
+      <td>...</td>
+      <td>100</td>
+      <td>True</td>
+      <td>98.53</td>
+      <td>0.045</td>
+      <td>198.53</td>
+      <td>0.500</td>
+      <td>1.000</td>
+      <td>0.0</td>
+      <td>-0.006</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AAPL250516C00105000</td>
+      <td>AAPL</td>
+      <td>1747425600</td>
+      <td>call</td>
+      <td>105.0</td>
+      <td>1736260200</td>
+      <td>3</td>
+      <td>1746820800</td>
+      <td>92.75</td>
+      <td>105</td>
+      <td>...</td>
+      <td>4</td>
+      <td>True</td>
+      <td>93.53</td>
+      <td>0.095</td>
+      <td>198.53</td>
+      <td>1.758</td>
+      <td>0.997</td>
+      <td>0.0</td>
+      <td>-0.038</td>
+      <td>0.257</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AAPL250516C00110000</td>
+      <td>AAPL</td>
+      <td>1747425600</td>
+      <td>call</td>
+      <td>110.0</td>
+      <td>1736260200</td>
+      <td>3</td>
+      <td>1746820800</td>
+      <td>87.45</td>
+      <td>105</td>
+      <td>...</td>
+      <td>37</td>
+      <td>True</td>
+      <td>88.53</td>
+      <td>0.080</td>
+      <td>198.53</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AAPL250516C00115000</td>
+      <td>AAPL</td>
+      <td>1747425600</td>
+      <td>call</td>
+      <td>115.0</td>
+      <td>1736260200</td>
+      <td>3</td>
+      <td>1746820800</td>
+      <td>82.60</td>
+      <td>105</td>
+      <td>...</td>
+      <td>4</td>
+      <td>True</td>
+      <td>83.53</td>
+      <td>0.105</td>
+      <td>198.53</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 25 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">options</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;optionSymbol&#39;, &#39;underlying&#39;, &#39;expiration&#39;, &#39;side&#39;, &#39;strike&#39;,
+       &#39;firstTraded&#39;, &#39;dte&#39;, &#39;updated&#39;, &#39;bid&#39;, &#39;bidSize&#39;, &#39;mid&#39;, &#39;ask&#39;,
+       &#39;askSize&#39;, &#39;last&#39;, &#39;openInterest&#39;, &#39;volume&#39;, &#39;inTheMoney&#39;,
+       &#39;intrinsicValue&#39;, &#39;extrinsicValue&#39;, &#39;underlyingPrice&#39;, &#39;iv&#39;, &#39;delta&#39;,
+       &#39;gamma&#39;, &#39;theta&#39;, &#39;vega&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocessing">
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
+<p>We turn date into <code class="docutils literal notranslate"><span class="pre">pd.datetime</span></code> format</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;expiration&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">options</span><span class="p">[</span><span class="s1">&#39;expiration_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;expiration&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+    <span class="n">options</span><span class="p">[</span><span class="s1">&#39;first_traded_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;firstTraded&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+    <span class="n">options</span><span class="p">[</span><span class="s1">&#39;last_updated_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;updated&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+    <span class="c1"># remove expiration, firstTraded, and updated columns</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;expiration&#39;</span><span class="p">,</span> <span class="s1">&#39;firstTraded&#39;</span><span class="p">,</span> <span class="s1">&#39;updated&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Expiration Date Range:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Min: </span><span class="si">{</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;expiration_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">, Max: </span><span class="si">{</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;expiration_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">First Traded Date Range:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Min: </span><span class="si">{</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;first_traded_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">, Max: </span><span class="si">{</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;first_traded_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Expiration Date Range:
+Min: 2025-05-16 20:00:00, Max: 2025-05-16 20:00:00
+
+First Traded Date Range:
+Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;optionSymbol&#39;</span><span class="p">])</span>
+<span class="n">options</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>underlying</th>
+      <th>side</th>
+      <th>strike</th>
+      <th>dte</th>
+      <th>bid</th>
+      <th>bidSize</th>
+      <th>mid</th>
+      <th>ask</th>
+      <th>askSize</th>
+      <th>last</th>
+      <th>...</th>
+      <th>extrinsicValue</th>
+      <th>underlyingPrice</th>
+      <th>iv</th>
+      <th>delta</th>
+      <th>gamma</th>
+      <th>theta</th>
+      <th>vega</th>
+      <th>expiration_date</th>
+      <th>first_traded_date</th>
+      <th>last_updated_date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AAPL</td>
+      <td>call</td>
+      <td>95.0</td>
+      <td>3</td>
+      <td>102.75</td>
+      <td>105</td>
+      <td>103.525</td>
+      <td>104.30</td>
+      <td>105</td>
+      <td>104.25</td>
+      <td>...</td>
+      <td>0.005</td>
+      <td>198.53</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-04-08 13:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AAPL</td>
+      <td>call</td>
+      <td>100.0</td>
+      <td>3</td>
+      <td>97.95</td>
+      <td>105</td>
+      <td>98.575</td>
+      <td>99.20</td>
+      <td>105</td>
+      <td>97.95</td>
+      <td>...</td>
+      <td>0.045</td>
+      <td>198.53</td>
+      <td>0.500</td>
+      <td>1.000</td>
+      <td>0.0</td>
+      <td>-0.006</td>
+      <td>0.000</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-07 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AAPL</td>
+      <td>call</td>
+      <td>105.0</td>
+      <td>3</td>
+      <td>92.75</td>
+      <td>105</td>
+      <td>93.625</td>
+      <td>94.50</td>
+      <td>105</td>
+      <td>93.48</td>
+      <td>...</td>
+      <td>0.095</td>
+      <td>198.53</td>
+      <td>1.758</td>
+      <td>0.997</td>
+      <td>0.0</td>
+      <td>-0.038</td>
+      <td>0.257</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-07 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AAPL</td>
+      <td>call</td>
+      <td>110.0</td>
+      <td>3</td>
+      <td>87.45</td>
+      <td>105</td>
+      <td>88.450</td>
+      <td>89.45</td>
+      <td>105</td>
+      <td>87.95</td>
+      <td>...</td>
+      <td>0.080</td>
+      <td>198.53</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-07 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AAPL</td>
+      <td>call</td>
+      <td>115.0</td>
+      <td>3</td>
+      <td>82.60</td>
+      <td>105</td>
+      <td>83.425</td>
+      <td>84.25</td>
+      <td>105</td>
+      <td>83.55</td>
+      <td>...</td>
+      <td>0.105</td>
+      <td>198.53</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-07 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 24 columns</p>
+</div></div></div>
+</div>
+<p>Since we have a lot of options, we will only study short-dated options data today at 2025-05-13, expiring three days later on 2025-05-16:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_options</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span>
+    <span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;dte&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;expiration_date&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;2025-05-16 20:00:00&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">filtered_options</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>underlying</th>
+      <th>side</th>
+      <th>strike</th>
+      <th>dte</th>
+      <th>bid</th>
+      <th>bidSize</th>
+      <th>mid</th>
+      <th>ask</th>
+      <th>askSize</th>
+      <th>last</th>
+      <th>...</th>
+      <th>extrinsicValue</th>
+      <th>underlyingPrice</th>
+      <th>iv</th>
+      <th>delta</th>
+      <th>gamma</th>
+      <th>theta</th>
+      <th>vega</th>
+      <th>expiration_date</th>
+      <th>first_traded_date</th>
+      <th>last_updated_date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AAPL</td>
+      <td>call</td>
+      <td>95.0</td>
+      <td>3</td>
+      <td>102.75</td>
+      <td>105</td>
+      <td>103.525</td>
+      <td>104.30</td>
+      <td>105</td>
+      <td>104.25</td>
+      <td>...</td>
+      <td>0.005</td>
+      <td>198.53</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-04-08 13:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AAPL</td>
+      <td>call</td>
+      <td>100.0</td>
+      <td>3</td>
+      <td>97.95</td>
+      <td>105</td>
+      <td>98.575</td>
+      <td>99.20</td>
+      <td>105</td>
+      <td>97.95</td>
+      <td>...</td>
+      <td>0.045</td>
+      <td>198.53</td>
+      <td>0.500</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>-0.006</td>
+      <td>0.000</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-07 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AAPL</td>
+      <td>call</td>
+      <td>105.0</td>
+      <td>3</td>
+      <td>92.75</td>
+      <td>105</td>
+      <td>93.625</td>
+      <td>94.50</td>
+      <td>105</td>
+      <td>93.48</td>
+      <td>...</td>
+      <td>0.095</td>
+      <td>198.53</td>
+      <td>1.758</td>
+      <td>0.997</td>
+      <td>0.000</td>
+      <td>-0.038</td>
+      <td>0.257</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-07 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AAPL</td>
+      <td>call</td>
+      <td>110.0</td>
+      <td>3</td>
+      <td>87.45</td>
+      <td>105</td>
+      <td>88.450</td>
+      <td>89.45</td>
+      <td>105</td>
+      <td>87.95</td>
+      <td>...</td>
+      <td>0.080</td>
+      <td>198.53</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-07 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AAPL</td>
+      <td>call</td>
+      <td>115.0</td>
+      <td>3</td>
+      <td>82.60</td>
+      <td>105</td>
+      <td>83.425</td>
+      <td>84.25</td>
+      <td>105</td>
+      <td>83.55</td>
+      <td>...</td>
+      <td>0.105</td>
+      <td>198.53</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-07 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>AAPL</td>
+      <td>put</td>
+      <td>300.0</td>
+      <td>3</td>
+      <td>101.30</td>
+      <td>105</td>
+      <td>101.800</td>
+      <td>102.30</td>
+      <td>105</td>
+      <td>76.84</td>
+      <td>...</td>
+      <td>0.330</td>
+      <td>198.53</td>
+      <td>1.501</td>
+      <td>-0.970</td>
+      <td>0.002</td>
+      <td>-0.184</td>
+      <td>1.871</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-06 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>AAPL</td>
+      <td>put</td>
+      <td>305.0</td>
+      <td>3</td>
+      <td>105.90</td>
+      <td>105</td>
+      <td>106.725</td>
+      <td>107.55</td>
+      <td>105</td>
+      <td>0.00</td>
+      <td>...</td>
+      <td>0.255</td>
+      <td>198.53</td>
+      <td>1.505</td>
+      <td>-0.975</td>
+      <td>0.001</td>
+      <td>-0.158</td>
+      <td>1.625</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-06 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>AAPL</td>
+      <td>put</td>
+      <td>310.0</td>
+      <td>3</td>
+      <td>111.15</td>
+      <td>100</td>
+      <td>111.650</td>
+      <td>112.15</td>
+      <td>100</td>
+      <td>88.85</td>
+      <td>...</td>
+      <td>0.180</td>
+      <td>198.53</td>
+      <td>1.505</td>
+      <td>-0.979</td>
+      <td>0.001</td>
+      <td>-0.132</td>
+      <td>1.391</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-06 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>AAPL</td>
+      <td>put</td>
+      <td>315.0</td>
+      <td>3</td>
+      <td>116.25</td>
+      <td>100</td>
+      <td>116.725</td>
+      <td>117.20</td>
+      <td>100</td>
+      <td>82.45</td>
+      <td>...</td>
+      <td>0.255</td>
+      <td>198.53</td>
+      <td>1.599</td>
+      <td>-0.976</td>
+      <td>0.001</td>
+      <td>-0.162</td>
+      <td>1.570</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-06 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>AAPL</td>
+      <td>put</td>
+      <td>320.0</td>
+      <td>3</td>
+      <td>121.25</td>
+      <td>100</td>
+      <td>121.775</td>
+      <td>122.30</td>
+      <td>100</td>
+      <td>115.53</td>
+      <td>...</td>
+      <td>0.305</td>
+      <td>198.53</td>
+      <td>1.676</td>
+      <td>-0.974</td>
+      <td>0.001</td>
+      <td>-0.183</td>
+      <td>1.673</td>
+      <td>2025-05-16 20:00:00</td>
+      <td>2025-01-06 14:30:00</td>
+      <td>2025-05-09 20:00:00</td>
+    </tr>
+  </tbody>
+</table>
+<p>118 rows × 24 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="data-analysis">
+<h2>Data Analysis<a class="headerlink" href="#data-analysis" title="Link to this heading">#</a></h2>
+<p>Abbreviations: IV (Implied Vol), ATM(At-the-money, option has strike = stock), OTM(out-of-the-money), ITM(In-the-money),
+B-S (Black-Scholes)</p>
+<p>We first plot the price of call and put options with respect to different strikes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">call_options</span> <span class="o">=</span> <span class="n">filtered_options</span><span class="p">[</span><span class="n">filtered_options</span><span class="p">[</span><span class="s1">&#39;side&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;call&#39;</span><span class="p">]</span>
+<span class="n">put_options</span> <span class="o">=</span> <span class="n">filtered_options</span><span class="p">[</span><span class="n">filtered_options</span><span class="p">[</span><span class="s1">&#39;side&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;put&#39;</span><span class="p">]</span>
+<span class="n">underlying_price</span> <span class="o">=</span> <span class="n">filtered_options</span><span class="p">[</span><span class="s1">&#39;underlyingPrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">call_options</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">],</span> <span class="n">call_options</span><span class="p">[</span><span class="s1">&#39;bid&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Call Bid Price&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">call_options</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">],</span> <span class="n">call_options</span><span class="p">[</span><span class="s1">&#39;ask&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Call Ask Price&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a vertical line at the underlying price</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">underlying_price</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Underlying Price: </span><span class="si">{</span><span class="n">underlying_price</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add labels, legend, and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Strike Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Option Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;AAPL Call Option Prices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6c158e81c5fc704f55e5b858a4abdadda930eec4bfeec61b771ef02eb750dfcc.png" src="../_images/6c158e81c5fc704f55e5b858a4abdadda930eec4bfeec61b771ef02eb750dfcc.png" />
+</div>
+</div>
+<p>We have payoffs for call <span class="math notranslate nohighlight">\(C(K) = (S-K)^+\)</span>, where <span class="math notranslate nohighlight">\(S\)</span> is the stock price at expiry, and put <span class="math notranslate nohighlight">\(P(K) = (K-S)^+\)</span></p>
+<p>Clearly as strike increase, the call payoff decreases, so it gets cheaper. We should expect a montonically decreasing function w.r.t. strike for the call, as observed. Similarly the put having <span class="math notranslate nohighlight">\(P(K) = (K-S)^+\)</span> should have monotonically increasing w.r.t. strike:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">put_options</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">],</span> <span class="n">put_options</span><span class="p">[</span><span class="s1">&#39;bid&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Put Bid Price&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">put_options</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">],</span> <span class="n">put_options</span><span class="p">[</span><span class="s1">&#39;ask&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Put Ask Price&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">underlying_price</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ATM: </span><span class="si">{</span><span class="n">underlying_price</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Strike Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Option Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;AAPL Put Option Prices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/83934cc307c464107c544b3b63600d2bcc5a642aec34340b9aab656331fcdaad.png" src="../_images/83934cc307c464107c544b3b63600d2bcc5a642aec34340b9aab656331fcdaad.png" />
+</div>
+</div>
+<section id="implied-vol">
+<h3>Implied Vol<a class="headerlink" href="#implied-vol" title="Link to this heading">#</a></h3>
+<p>We will first study the implied volatility (IV), given in the options data. IV is the volatility input into the Black-Scholes model for options pricing. It is a property of the option, so the more expensive an option is, the higher IV it will imply. Under BS framework, a stock should have constant volatility, but in fact due to inconsistent market pricing, stocks would have different IV at different strikes, known as the ‘volatility smile’.</p>
+<p>We quote the Black-Scholes formula for a European call option:</p>
+<div class="math notranslate nohighlight">
+\[
+C = S_0 \Phi(d_1) - K e^{-rT} \Phi(d_2)
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+d_1 = \frac{\ln(S_0 / K) + (r + \frac{\sigma^2}{2})T}{\sigma \sqrt{T}}, \quad
+d_2 = d_1 - \sigma \sqrt{T}
+\]</div>
+<p>and IV is given by <span class="math notranslate nohighlight">\(\sigma_{\text{impl}}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+C_{\text{market}} = C_{\text{Black-Scholes}}(\sigma_{\text{impl}})
+\]</div>
+<p>IV needs to be solved numerically, using Newton’s method or bisection, etc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot IV</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="c1"># plt.plot(filtered_options[&#39;strike&#39;], filtered_options[&#39;iv&#39;], &#39;o&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">call_options</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">],</span> <span class="n">call_options</span><span class="p">[</span><span class="s1">&#39;iv&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Call IV&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">put_options</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">],</span> <span class="n">put_options</span><span class="p">[</span><span class="s1">&#39;iv&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Put IV&#39;</span><span class="p">)</span>
+
+<span class="c1"># add underlying price</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">underlying_price</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Underlying Price: </span><span class="si">{</span><span class="n">underlying_price</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Strike Price&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Implied Volatility&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AAPL Implied Volatility&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8ee87f4bd2e66189b02c87762628ecf01a8542961b9dbd5aad77384241661f96.png" src="../_images/8ee87f4bd2e66189b02c87762628ecf01a8542961b9dbd5aad77384241661f96.png" />
+</div>
+</div>
+<p>Note the convention is to use the IV of OTM calls and OTM puts, so we replot here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot OTM call and put IV</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># filter OTM calls and puts</span>
+<span class="n">otm_calls</span> <span class="o">=</span> <span class="n">call_options</span><span class="p">[</span><span class="n">call_options</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">underlying_price</span><span class="p">]</span>
+<span class="n">otm_puts</span> <span class="o">=</span> <span class="n">put_options</span><span class="p">[</span><span class="n">put_options</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">underlying_price</span><span class="p">]</span>
+
+<span class="c1"># plot IV for OTM calls and puts</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">otm_calls</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">],</span> <span class="n">otm_calls</span><span class="p">[</span><span class="s1">&#39;iv&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;OTM Call IV&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">otm_puts</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">],</span> <span class="n">otm_puts</span><span class="p">[</span><span class="s1">&#39;iv&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;OTM Put IV&#39;</span><span class="p">)</span>
+
+<span class="c1"># add underlying price</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">underlying_price</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Underlying Price: </span><span class="si">{</span><span class="n">underlying_price</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Strike Price&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Implied Volatility&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AAPL OTM Implied Volatility&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d5b74cad4e0c5f08a2e58723a0f7dea3f64e7a53c7d4456c05825579a27cf58d.png" src="../_images/d5b74cad4e0c5f08a2e58723a0f7dea3f64e7a53c7d4456c05825579a27cf58d.png" />
+</div>
+</div>
+<p>This is somewhat a ‘smile’ structure, as we can see IV is lowest when options have strike equal to current AAPL stock price. IV is higher for OTM calls (strike &gt; underlying), as people buy OTM calls for speculation. IV is also higher for OTM puts (strike &lt; underlying), as institutions which have long positions in stocks often buy OTM puts for hedging / protection.</p>
+</section>
+<section id="delta">
+<h3>Delta<a class="headerlink" href="#delta" title="Link to this heading">#</a></h3>
+<p>Delta is the most important greek with respect to an option. It is given by <span class="math notranslate nohighlight">\(dV/dS\)</span>, or how sensitive the option is to movement of underlying. Under B-S framework, delta of call option is given by <span class="math notranslate nohighlight">\(\phi(d_1)\)</span></p>
+<p>For shorted-dated option, ATM call and put should roughly have <span class="math notranslate nohighlight">\( \Delta = \pm 0.5 \)</span>. This is because we have for ATM call (<span class="math notranslate nohighlight">\(S = K\)</span>), as <span class="math notranslate nohighlight">\( T \to 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+d_{1,2} = \frac{\left(r \pm \frac{\sigma^2}{2}\right)T}{\sigma \sqrt{T}}
+\to \frac{\sigma \sqrt{T}}{2} \to 0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\phi(d_1), \phi(d_2) \to 0.5
+\]</div>
+<p>As strike increases, OTM call options should have delta convering to 0, while as strike decreases, ITM call delta converge to 1.<br />
+We verify that by plotting call and put options for AAPL with respect to strike price:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot delta</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">call_options</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">],</span> <span class="n">call_options</span><span class="p">[</span><span class="s1">&#39;delta&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Call Delta&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">put_options</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">],</span> <span class="n">put_options</span><span class="p">[</span><span class="s1">&#39;delta&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Put Delta&#39;</span><span class="p">)</span>
+
+<span class="c1"># add underlying price</span>
+<span class="n">underlying_price</span> <span class="o">=</span> <span class="n">filtered_options</span><span class="p">[</span><span class="s1">&#39;underlyingPrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">underlying_price</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ITM: </span><span class="si">{</span><span class="n">underlying_price</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Strike Price&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Delta&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AAPL Delta&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/45a0aa956b79420db38c85c0f56c3faabe75b71ddffb99fe785fd8ed0ba959fa.png" src="../_images/45a0aa956b79420db38c85c0f56c3faabe75b71ddffb99fe785fd8ed0ba959fa.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./data_analysis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Aapl_stock.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">AAPL Stock Data Analysis</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-data">Fetching data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implied-vol">Implied Vol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delta">Delta</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tong Xiao
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

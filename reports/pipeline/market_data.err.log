@@ -1,0 +1,58 @@
+Traceback (most recent call last):
+  File "/Users/jack/DS_CW2/ds_venv/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/jack/DS_CW2/ds_venv/lib/python3.11/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jack/DS_CW2/ds_venv/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/jack/DS_CW2/ds_venv/lib/python3.11/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Users/jack/DS_CW2/ds_venv/lib/python3.11/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/jack/DS_CW2/ds_venv/lib/python3.11/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# load options
+import os
+import subprocess
+csv_path = "option_data/options_AAPL.csv"
+
+# Check if the file exists
+if not os.path.exists(csv_path):
+    print(f"{csv_path} not found. Fetching data...")
+    subprocess.run(["python3", "scripts/fetch_options.py"], check=True)
+print("Loading options data from CSV...")
+options = pd.read_csv(csv_path)
+options.head()
+------------------
+
+----- stderr -----
+/Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python: can't open file '/Users/jack/DS_CW2/pipeline/scripts/fetch_options.py': [Errno 2] No such file or directory
+----- stdout -----
+option_data/options_AAPL.csv not found. Fetching data...
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mCalledProcessError[39m                        Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 9[39m
+[32m      7[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m os.path.exists(csv_path):
+[32m      8[39m     [38;5;28mprint[39m([33mf[39m[33m"[39m[38;5;132;01m{[39;00mcsv_path[38;5;132;01m}[39;00m[33m not found. Fetching data...[39m[33m"[39m)
+[32m----> [39m[32m9[39m     [43msubprocess[49m[43m.[49m[43mrun[49m[43m([49m[43m[[49m[33;43m"[39;49m[33;43mpython3[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mscripts/fetch_options.py[39;49m[33;43m"[39;49m[43m][49m[43m,[49m[43m [49m[43mcheck[49m[43m=[49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m
+[32m     10[39m [38;5;28mprint[39m([33m"[39m[33mLoading options data from CSV...[39m[33m"[39m)
+[32m     11[39m options = pd.read_csv(csv_path)
+
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/subprocess.py:571[39m, in [36mrun[39m[34m(input, capture_output, timeout, check, *popenargs, **kwargs)[39m
+[32m    569[39m     retcode = process.poll()
+[32m    570[39m     [38;5;28;01mif[39;00m check [38;5;129;01mand[39;00m retcode:
+[32m--> [39m[32m571[39m         [38;5;28;01mraise[39;00m CalledProcessError(retcode, process.args,
+[32m    572[39m                                  output=stdout, stderr=stderr)
+[32m    573[39m [38;5;28;01mreturn[39;00m CompletedProcess(process.args, retcode, stdout, stderr)
+
+[31mCalledProcessError[39m: Command '['python3', 'scripts/fetch_options.py']' returned non-zero exit status 2.
+
