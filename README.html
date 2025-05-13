@@ -354,6 +354,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">📁 Project Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#book-structure">Book structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">🚀 Getting Started</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-repository">1. Clone the Repository</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-virtual-environment-and-install-dependencies">2. Create a Virtual Environment and Install Dependencies</a></li>
@@ -392,21 +393,25 @@ document.write(`
 <hr class="docutils" />
 <section id="project-structure">
 <h2>📁 Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading">#</a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
-├── _build/              # Output folder for the compiled Jupyter Book
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>├── _build/              # Output folder for the compiled Jupyter Book
 ├── _config.yml          # Jupyter Book configuration
 ├── _toc.yml             # Table of contents for the Jupyter Book
 ├── data_analysis/       # Jupyter notebooks for exploring and analyzing data
 ├── intro.md             # Introduction chapter for the Jupyter Book
 ├── logo.png             # Logo used in the book or documentation
 ├── option_data/         # Raw or processed option data used in analysis
-├── pipeline/            # Data processing and transformation pipelines
+├── pipeline/            # Introduction to the usage of pipelines
 ├── references.bib       # Bibliographic references for citations in the book
 ├── requirements.txt     # Python dependencies
 ├── scripts/             # Utility scripts for data preparation
 └── README.md            # Project overview (this file)
 </pre></div>
 </div>
+</section>
+<section id="book-structure">
+<h2>Book structure<a class="headerlink" href="#book-structure" title="Link to this heading">#</a></h2>
+<p>First chapter “Intro to Data Pipelines used” in <code class="docutils literal notranslate"><span class="pre">pipeline/</span></code> introduces how to use the two API.<br />
+Second chapter “Data analysis” in <code class="docutils literal notranslate"><span class="pre">data_analysis/</span></code> contains the two notebooks using the two APIs for data analysis on the stock and options data of Apple Inc.</p>
 </section>
 <section id="getting-started">
 <h2>🚀 Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
@@ -531,6 +536,7 @@ ghp-import<span class="w"> </span>-n<span class="w"> </span>-p<span class="w"> <
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">📁 Project Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#book-structure">Book structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">🚀 Getting Started</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-repository">1. Clone the Repository</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-virtual-environment-and-install-dependencies">2. Create a Virtual Environment and Install Dependencies</a></li>
