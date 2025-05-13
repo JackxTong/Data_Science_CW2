@@ -2,3 +2,5 @@
 .env
 *data/
 plots/
+__pycache__/
+_build/

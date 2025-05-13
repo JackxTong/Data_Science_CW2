@@ -1,3 +1,11 @@
 jupyter-book
 matplotlib
 numpy
+yfinance
+pandas
+matplotlib
+numpy
+requests
+python-dotenv
+scipy
+__pycache__

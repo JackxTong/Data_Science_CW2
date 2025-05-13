@@ -5,6 +5,12 @@
 format: jb-book
 root: intro
 chapters:
-- file: brainteasers/intro
+- file: pipeline/intro
   sections:
-  - file: brainteasers/Consecutive_Heads
+  - file: pipeline/yfinance
+  - file: pipeline/market_data
+
+- file: data_analysis/intro
+  sections:
+  - file: data_analysis/Aapl_stock
+  - file: data_analysis/Aapl_options

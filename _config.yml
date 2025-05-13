@@ -5,8 +5,9 @@ title: Data Science CW2
 author: Tong Xiao
 logo: logo.png
 
+copyright: "2025"
 execute:
-  execute_notebooks: force
+  execute_notebooks: "off"
 
 # Define the name of the latex output file for PDF builds
 latex:

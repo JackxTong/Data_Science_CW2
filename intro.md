@@ -1,11 +1,8 @@
-# Welcome to your Jupyter Book
+# Data Science Coursework 2
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+CID: 02056823
 
-Check out the content pages bundled with this sample book to see more.
+This is the webpage for my submission for MATH 70076 Data Science CW2 at Imperial College London. The github link is [here](https://github.com/JackxTong/Data_Science_CW2)
 
 ```{tableofcontents}
 ```
