@@ -1,4 +1,4 @@
-# 📊 Data Science Coursework 2 — Imperial College London
+# 📊 AAPL Stock Analysis with Jupyter Book
 
 This repository contains the final project for **MATH 70076: Data Science** at **Imperial College London**. The project is designed to be **open-source, reproducible**, and demonstrates the application of data pipelines and exploratory data analysis in **financial data science**.
 
