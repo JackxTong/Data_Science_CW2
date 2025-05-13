@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data Science Coursework2 &#8212; Data Science CW2</title>
+    <title>📊 Data Science Coursework 2 — Imperial College London &#8212; Data Science CW2</title>
   
   
   
@@ -343,7 +343,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Data Science Coursework2</h1>
+    <h1>📊 Data Science Coursework 2 — Imperial College London</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -353,10 +353,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-use-jupyter-book">To use Jupyter-Book:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functionalities">Functionalities</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-and-analyzing-stock-data">Fetching and analyzing stock data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-and-analyzing-options-data">Fetching and analyzing options data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">📁 Project Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">🚀 Getting Started</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-repository">1. Clone the Repository</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-virtual-environment-and-install-dependencies">2. Create a Virtual Environment and Install Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-jupyter-notebooks-into-root">3. Add jupyter notebooks into root</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-book">4. Build the book</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#host-the-book-on-github-pages">5. Host the Book on Github Pages</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functionalities-analysis">📈 Functionalities &amp; Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-stock-data-analysis">1. Historical Stock Data Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#options-market-analysis">2. Options Market Analysis</a></li>
 </ul>
 </li>
 </ul>
@@ -370,37 +378,108 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="data-science-coursework2">
-<h1>Data Science Coursework2<a class="headerlink" href="#data-science-coursework2" title="Link to this heading">#</a></h1>
-<p>This project is submitted as CW2 to MATH 70076 Data Science at Imperial College London. This is aimed to be an open-source and reproducible data science project, featuring how we can fetch historical stock data of AAPL using data pipeline of, and do data analysis on my personal webpage using the template of <a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">Jupyter-book</a></p>
-<p>The website is hosted <a class="reference external" href="https://jackxtong.github.io/Data_Science_CW2/">here</a>, and published online with Github Pages.</p>
-<section id="to-use-jupyter-book">
-<h2>To use Jupyter-Book:<a class="headerlink" href="#to-use-jupyter-book" title="Link to this heading">#</a></h2>
-<p>Clone my repository, or follow the instructions at <a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">Jupyter-book</a>.</p>
-<p>You can create a venv, then activate the venv, and install all dependencies:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="sb">`</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-science-coursework-2-imperial-college-london">
+<h1>📊 Data Science Coursework 2 — Imperial College London<a class="headerlink" href="#data-science-coursework-2-imperial-college-london" title="Link to this heading">#</a></h1>
+<p>This repository contains the final project for <strong>MATH 70076: Data Science</strong> at <strong>Imperial College London</strong>. The project is designed to be <strong>open-source, reproducible</strong>, and demonstrates the application of data pipelines and exploratory data analysis in <strong>financial data science</strong>.</p>
+<p>The goal is to showcase how to:</p>
+<ul class="simple">
+<li><p>Fetch and analyze <strong>historical stock data</strong> using the <code class="docutils literal notranslate"><span class="pre">yfinance</span></code> API.</p></li>
+<li><p>Fetch and analyze <strong>options data</strong> using the <code class="docutils literal notranslate"><span class="pre">Market</span> <span class="pre">Data</span></code> public API.</p></li>
+<li><p>Present the analysis through a clean and interactive <strong>Jupyter Book</strong>.</p></li>
+<li><p>Host the analysis online via <strong>GitHub Pages</strong>.</p></li>
+</ul>
+<p>📚 <strong>Website</strong>: <a class="reference external" href="https://jackxtong.github.io/Data_Science_CW2/">https://jackxtong.github.io/Data_Science_CW2/</a></p>
+<hr class="docutils" />
+<section id="project-structure">
+<h2>📁 Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
+├── _build/              # Output folder for the compiled Jupyter Book
+├── _config.yml          # Jupyter Book configuration
+├── _toc.yml             # Table of contents for the Jupyter Book
+├── data_analysis/       # Jupyter notebooks for exploring and analyzing data
+├── intro.md             # Introduction chapter for the Jupyter Book
+├── logo.png             # Logo used in the book or documentation
+├── option_data/         # Raw or processed option data used in analysis
+├── pipeline/            # Data processing and transformation pipelines
+├── references.bib       # Bibliographic references for citations in the book
+├── requirements.txt     # Python dependencies
+├── scripts/             # Utility scripts for data preparation
+└── README.md            # Project overview (this file)
 </pre></div>
 </div>
-<p>Then simply put your jupyter notebooks at root directoy, make sure you add them to the <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> file, and specify the upstream at <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code>.<br />
-Building the book locally:</p>
+</section>
+<section id="getting-started">
+<h2>🚀 Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<p>To build and view the Jupyter Book locally:</p>
+<section id="clone-the-repository">
+<h3>1. Clone the Repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/jackxtong/Data_Science_CW2.git
+<span class="nb">cd</span><span class="w"> </span>Data_Science_CW2
+</pre></div>
+</div>
+</section>
+<section id="create-a-virtual-environment-and-install-dependencies">
+<h3>2. Create a Virtual Environment and Install Dependencies<a class="headerlink" href="#create-a-virtual-environment-and-install-dependencies" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="add-jupyter-notebooks-into-root">
+<h3>3. Add jupyter notebooks into root<a class="headerlink" href="#add-jupyter-notebooks-into-root" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Add them to <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> to include them in the book</p></li>
+<li><p>Edit <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> to set the upstream</p></li>
+</ul>
+</section>
+<section id="build-the-book">
+<h3>4. Build the book<a class="headerlink" href="#build-the-book" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jb<span class="w"> </span>build<span class="w"> </span>.
 </pre></div>
 </div>
-<p>Hosting it online (by pushing to gh-pages branch at your github)</p>
+</section>
+<section id="host-the-book-on-github-pages">
+<h3>5. Host the Book on Github Pages<a class="headerlink" href="#host-the-book-on-github-pages" title="Link to this heading">#</a></h3>
+<p>Install the tool, then push the compiled book to the gh-pages branch:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>ghp-import
 ghp-import<span class="w"> </span>-n<span class="w"> </span>-p<span class="w"> </span>-f<span class="w"> </span>_build/html
 </pre></div>
 </div>
 </section>
-<section id="functionalities">
-<h2>Functionalities<a class="headerlink" href="#functionalities" title="Link to this heading">#</a></h2>
-<section id="fetching-and-analyzing-stock-data">
-<h3>Fetching and analyzing stock data<a class="headerlink" href="#fetching-and-analyzing-stock-data" title="Link to this heading">#</a></h3>
-<p>The first notebook fetched historical AAPL stock data using free yfinance API. It studies the time series properties of AAPL stock series, analyzing whether it displays the four stylized facts for financial time series.</p>
 </section>
-<section id="fetching-and-analyzing-options-data">
-<h3>Fetching and analyzing options data<a class="headerlink" href="#fetching-and-analyzing-options-data" title="Link to this heading">#</a></h3>
-<p>The second notebook uses data pipeline of <a class="reference external" href="https://api.marketdata.app/v1/options/chain/AAPL/">market data</a>. It studies the distribution of the call options data of AAPL, analyzing whether it agrees with Black-Scholes framework.</p>
+<section id="functionalities-analysis">
+<h2>📈 Functionalities &amp; Analysis<a class="headerlink" href="#functionalities-analysis" title="Link to this heading">#</a></h2>
+<section id="historical-stock-data-analysis">
+<h3>1. Historical Stock Data Analysis<a class="headerlink" href="#historical-stock-data-analysis" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Fetches historical stock data for <strong>AAPL (Apple Inc.)</strong> using the <code class="docutils literal notranslate"><span class="pre">yfinance</span></code> API</p></li>
+<li><p>Performs exploratory time series analysis on both price levels and returns</p></li>
+<li><p>Investigates classic <strong>stylized facts</strong> of financial time series:</p>
+<ul>
+<li><p>Volatility clustering</p></li>
+<li><p>Heavy tails</p></li>
+<li><p>Absence of autocorrelation in returns</p></li>
+<li><p>Leverage effects</p></li>
+</ul>
+</li>
+</ul>
+<p>📓 Notebook: <code class="docutils literal notranslate"><span class="pre">data_analysis/Aapl_stock.ipynb</span></code></p>
+</section>
+<hr class="docutils" />
+<section id="options-market-analysis">
+<h3>2. Options Market Analysis<a class="headerlink" href="#options-market-analysis" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Uses the <a class="reference external" href="https://api.marketdata.app/v1/options/chain/AAPL/">Market Data API</a> to retrieve <strong>AAPL call options</strong> data</p></li>
+<li><p>Analyzes the distribution of option prices across strike and expiry dimensions</p></li>
+<li><p>Compares empirical observations with assumptions of the <strong>Black-Scholes model</strong>, including:</p>
+<ul>
+<li><p>Log-normality of returns</p></li>
+<li><p>Constant volatility</p></li>
+</ul>
+</li>
+</ul>
+<p>📓 Notebook: <code class="docutils literal notranslate"><span class="pre">data_analysis/Aapl_options.ipynb</span></code></p>
 </section>
 </section>
 </section>
@@ -451,10 +530,18 @@ ghp-import<span class="w"> </span>-n<span class="w"> </span>-p<span class="w"> <
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-use-jupyter-book">To use Jupyter-Book:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functionalities">Functionalities</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-and-analyzing-stock-data">Fetching and analyzing stock data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-and-analyzing-options-data">Fetching and analyzing options data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">📁 Project Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">🚀 Getting Started</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-repository">1. Clone the Repository</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-virtual-environment-and-install-dependencies">2. Create a Virtual Environment and Install Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-jupyter-notebooks-into-root">3. Add jupyter notebooks into root</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-book">4. Build the book</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#host-the-book-on-github-pages">5. Host the Book on Github Pages</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functionalities-analysis">📈 Functionalities &amp; Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-stock-data-analysis">1. Historical Stock Data Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#options-market-analysis">2. Options Market Analysis</a></li>
 </ul>
 </li>
 </ul>
