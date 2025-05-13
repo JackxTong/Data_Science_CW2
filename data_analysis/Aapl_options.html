@@ -380,19 +380,24 @@ document.write(`
 <p>I define a subscript at <code class="docutils literal notranslate"><span class="pre">scripts/fetch_options.py</span></code>. Running <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">scripts/fetch_options.py</span></code> will download the options data into the <code class="docutils literal notranslate"><span class="pre">option_data</span></code> folder. The following cell first checks if the csv has already been downloaded, if not it will run <code class="docutils literal notranslate"><span class="pre">scripts/fetch_options.py</span></code> to download:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load options</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">csv_path</span> <span class="o">=</span> <span class="s2">&quot;../option_data/options_AAPL.csv&quot;</span>
+<span class="c1"># Get the absolute path to the current notebook directory</span>
+<span class="n">notebook_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> 
+
+<span class="c1"># Construct the absolute path to the CSV file</span>
+<span class="n">csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebook_dir</span><span class="p">,</span> <span class="s2">&quot;../option_data/options_AAPL.csv&quot;</span><span class="p">))</span>
 
 <span class="c1"># Check if the file exists</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">csv_path</span><span class="si">}</span><span class="s2"> not found. Fetching data...&quot;</span><span class="p">)</span>
-    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span> <span class="s2">&quot;../scripts/fetch_options.py&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fetch_script</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebook_dir</span><span class="p">,</span> <span class="s2">&quot;../scripts/fetch_options.py&quot;</span><span class="p">))</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span> <span class="n">fetch_script</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading options data from CSV...&quot;</span><span class="p">)</span>
 <span class="n">options</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">)</span>
 <span class="n">options</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -454,20 +459,20 @@ document.write(`
       <td>95.0</td>
       <td>1744119000</td>
       <td>3</td>
-      <td>1746820800</td>
-      <td>102.75</td>
+      <td>1747080000</td>
+      <td>115.25</td>
       <td>105</td>
       <td>...</td>
-      <td>0</td>
+      <td>1</td>
       <td>True</td>
-      <td>103.53</td>
-      <td>0.005</td>
-      <td>198.53</td>
-      <td>0.000</td>
-      <td>1.000</td>
+      <td>115.79</td>
+      <td>0.060</td>
+      <td>210.79</td>
+      <td>2.562</td>
+      <td>0.999</td>
       <td>0.0</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>-0.034</td>
+      <td>0.070</td>
     </tr>
     <tr>
       <th>1</th>
@@ -478,19 +483,19 @@ document.write(`
       <td>100.0</td>
       <td>1736260200</td>
       <td>3</td>
-      <td>1746820800</td>
-      <td>97.95</td>
+      <td>1747080000</td>
+      <td>110.15</td>
       <td>105</td>
       <td>...</td>
-      <td>100</td>
+      <td>1</td>
       <td>True</td>
-      <td>98.53</td>
-      <td>0.045</td>
-      <td>198.53</td>
-      <td>0.500</td>
+      <td>110.79</td>
+      <td>0.115</td>
+      <td>210.79</td>
+      <td>0.000</td>
       <td>1.000</td>
       <td>0.0</td>
-      <td>-0.006</td>
+      <td>0.000</td>
       <td>0.000</td>
     </tr>
     <tr>
@@ -502,20 +507,20 @@ document.write(`
       <td>105.0</td>
       <td>1736260200</td>
       <td>3</td>
-      <td>1746820800</td>
-      <td>92.75</td>
+      <td>1747080000</td>
+      <td>104.95</td>
       <td>105</td>
       <td>...</td>
-      <td>4</td>
+      <td>2</td>
       <td>True</td>
-      <td>93.53</td>
-      <td>0.095</td>
-      <td>198.53</td>
-      <td>1.758</td>
-      <td>0.997</td>
+      <td>105.79</td>
+      <td>0.065</td>
+      <td>210.79</td>
+      <td>0.000</td>
+      <td>1.000</td>
       <td>0.0</td>
-      <td>-0.038</td>
-      <td>0.257</td>
+      <td>0.000</td>
+      <td>0.000</td>
     </tr>
     <tr>
       <th>3</th>
@@ -526,15 +531,15 @@ document.write(`
       <td>110.0</td>
       <td>1736260200</td>
       <td>3</td>
-      <td>1746820800</td>
-      <td>87.45</td>
+      <td>1747080000</td>
+      <td>100.15</td>
       <td>105</td>
       <td>...</td>
-      <td>37</td>
+      <td>1</td>
       <td>True</td>
-      <td>88.53</td>
-      <td>0.080</td>
-      <td>198.53</td>
+      <td>100.79</td>
+      <td>0.090</td>
+      <td>210.79</td>
       <td>0.000</td>
       <td>1.000</td>
       <td>0.0</td>
@@ -550,20 +555,20 @@ document.write(`
       <td>115.0</td>
       <td>1736260200</td>
       <td>3</td>
-      <td>1746820800</td>
-      <td>82.60</td>
-      <td>105</td>
+      <td>1747080000</td>
+      <td>95.35</td>
+      <td>117</td>
       <td>...</td>
-      <td>4</td>
+      <td>0</td>
       <td>True</td>
-      <td>83.53</td>
-      <td>0.105</td>
-      <td>198.53</td>
-      <td>0.000</td>
+      <td>95.79</td>
+      <td>0.060</td>
+      <td>210.79</td>
+      <td>1.812</td>
       <td>1.000</td>
       <td>0.0</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>-0.022</td>
+      <td>0.039</td>
     </tr>
   </tbody>
 </table>
@@ -674,23 +679,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>call</td>
       <td>95.0</td>
       <td>3</td>
-      <td>102.75</td>
+      <td>115.25</td>
       <td>105</td>
-      <td>103.525</td>
-      <td>104.30</td>
+      <td>115.850</td>
+      <td>116.45</td>
       <td>105</td>
-      <td>104.25</td>
+      <td>114.00</td>
       <td>...</td>
-      <td>0.005</td>
-      <td>198.53</td>
-      <td>0.000</td>
-      <td>1.000</td>
+      <td>0.060</td>
+      <td>210.79</td>
+      <td>2.562</td>
+      <td>0.999</td>
       <td>0.0</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>-0.034</td>
+      <td>0.070</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-04-08 13:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>1</th>
@@ -698,23 +703,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>call</td>
       <td>100.0</td>
       <td>3</td>
-      <td>97.95</td>
+      <td>110.15</td>
       <td>105</td>
-      <td>98.575</td>
-      <td>99.20</td>
-      <td>105</td>
-      <td>97.95</td>
+      <td>110.675</td>
+      <td>111.20</td>
+      <td>10</td>
+      <td>111.20</td>
       <td>...</td>
-      <td>0.045</td>
-      <td>198.53</td>
-      <td>0.500</td>
+      <td>0.115</td>
+      <td>210.79</td>
+      <td>0.000</td>
       <td>1.000</td>
       <td>0.0</td>
-      <td>-0.006</td>
+      <td>0.000</td>
       <td>0.000</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-07 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>2</th>
@@ -722,23 +727,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>call</td>
       <td>105.0</td>
       <td>3</td>
-      <td>92.75</td>
+      <td>104.95</td>
       <td>105</td>
-      <td>93.625</td>
-      <td>94.50</td>
+      <td>105.725</td>
+      <td>106.50</td>
       <td>105</td>
-      <td>93.48</td>
+      <td>104.82</td>
       <td>...</td>
-      <td>0.095</td>
-      <td>198.53</td>
-      <td>1.758</td>
-      <td>0.997</td>
+      <td>0.065</td>
+      <td>210.79</td>
+      <td>0.000</td>
+      <td>1.000</td>
       <td>0.0</td>
-      <td>-0.038</td>
-      <td>0.257</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-07 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>3</th>
@@ -746,15 +751,15 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>call</td>
       <td>110.0</td>
       <td>3</td>
-      <td>87.45</td>
+      <td>100.15</td>
       <td>105</td>
-      <td>88.450</td>
-      <td>89.45</td>
+      <td>100.700</td>
+      <td>101.25</td>
       <td>105</td>
-      <td>87.95</td>
+      <td>101.11</td>
       <td>...</td>
-      <td>0.080</td>
-      <td>198.53</td>
+      <td>0.090</td>
+      <td>210.79</td>
       <td>0.000</td>
       <td>1.000</td>
       <td>0.0</td>
@@ -762,7 +767,7 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>0.000</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-07 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>4</th>
@@ -770,23 +775,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>call</td>
       <td>115.0</td>
       <td>3</td>
-      <td>82.60</td>
-      <td>105</td>
-      <td>83.425</td>
-      <td>84.25</td>
+      <td>95.35</td>
+      <td>117</td>
+      <td>95.850</td>
+      <td>96.35</td>
       <td>105</td>
       <td>83.55</td>
       <td>...</td>
-      <td>0.105</td>
-      <td>198.53</td>
-      <td>0.000</td>
+      <td>0.060</td>
+      <td>210.79</td>
+      <td>1.812</td>
       <td>1.000</td>
       <td>0.0</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>-0.022</td>
+      <td>0.039</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-07 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
   </tbody>
 </table>
@@ -853,23 +858,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>call</td>
       <td>95.0</td>
       <td>3</td>
-      <td>102.75</td>
+      <td>115.25</td>
       <td>105</td>
-      <td>103.525</td>
-      <td>104.30</td>
+      <td>115.850</td>
+      <td>116.45</td>
       <td>105</td>
-      <td>104.25</td>
+      <td>114.00</td>
       <td>...</td>
-      <td>0.005</td>
-      <td>198.53</td>
+      <td>0.060</td>
+      <td>210.79</td>
+      <td>2.562</td>
+      <td>0.999</td>
       <td>0.000</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>-0.034</td>
+      <td>0.070</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-04-08 13:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>1</th>
@@ -877,23 +882,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>call</td>
       <td>100.0</td>
       <td>3</td>
-      <td>97.95</td>
+      <td>110.15</td>
       <td>105</td>
-      <td>98.575</td>
-      <td>99.20</td>
-      <td>105</td>
-      <td>97.95</td>
+      <td>110.675</td>
+      <td>111.20</td>
+      <td>10</td>
+      <td>111.20</td>
       <td>...</td>
-      <td>0.045</td>
-      <td>198.53</td>
-      <td>0.500</td>
+      <td>0.115</td>
+      <td>210.79</td>
+      <td>0.000</td>
       <td>1.000</td>
       <td>0.000</td>
-      <td>-0.006</td>
+      <td>0.000</td>
       <td>0.000</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-07 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>2</th>
@@ -901,23 +906,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>call</td>
       <td>105.0</td>
       <td>3</td>
-      <td>92.75</td>
+      <td>104.95</td>
       <td>105</td>
-      <td>93.625</td>
-      <td>94.50</td>
+      <td>105.725</td>
+      <td>106.50</td>
       <td>105</td>
-      <td>93.48</td>
+      <td>104.82</td>
       <td>...</td>
-      <td>0.095</td>
-      <td>198.53</td>
-      <td>1.758</td>
-      <td>0.997</td>
+      <td>0.065</td>
+      <td>210.79</td>
       <td>0.000</td>
-      <td>-0.038</td>
-      <td>0.257</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-07 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>3</th>
@@ -925,15 +930,15 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>call</td>
       <td>110.0</td>
       <td>3</td>
-      <td>87.45</td>
+      <td>100.15</td>
       <td>105</td>
-      <td>88.450</td>
-      <td>89.45</td>
+      <td>100.700</td>
+      <td>101.25</td>
       <td>105</td>
-      <td>87.95</td>
+      <td>101.11</td>
       <td>...</td>
-      <td>0.080</td>
-      <td>198.53</td>
+      <td>0.090</td>
+      <td>210.79</td>
       <td>0.000</td>
       <td>1.000</td>
       <td>0.000</td>
@@ -941,7 +946,7 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>0.000</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-07 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>4</th>
@@ -949,23 +954,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>call</td>
       <td>115.0</td>
       <td>3</td>
-      <td>82.60</td>
-      <td>105</td>
-      <td>83.425</td>
-      <td>84.25</td>
+      <td>95.35</td>
+      <td>117</td>
+      <td>95.850</td>
+      <td>96.35</td>
       <td>105</td>
       <td>83.55</td>
       <td>...</td>
-      <td>0.105</td>
-      <td>198.53</td>
-      <td>0.000</td>
+      <td>0.060</td>
+      <td>210.79</td>
+      <td>1.812</td>
       <td>1.000</td>
       <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>-0.022</td>
+      <td>0.039</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-07 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>...</th>
@@ -997,23 +1002,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>put</td>
       <td>300.0</td>
       <td>3</td>
-      <td>101.30</td>
+      <td>88.85</td>
+      <td>10</td>
+      <td>89.325</td>
+      <td>89.80</td>
       <td>105</td>
-      <td>101.800</td>
-      <td>102.30</td>
-      <td>105</td>
-      <td>76.84</td>
+      <td>89.75</td>
       <td>...</td>
-      <td>0.330</td>
-      <td>198.53</td>
-      <td>1.501</td>
-      <td>-0.970</td>
-      <td>0.002</td>
-      <td>-0.184</td>
-      <td>1.871</td>
+      <td>0.115</td>
+      <td>210.79</td>
+      <td>1.586</td>
+      <td>-0.979</td>
+      <td>0.001</td>
+      <td>-0.183</td>
+      <td>1.098</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-06 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>114</th>
@@ -1021,23 +1026,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>put</td>
       <td>305.0</td>
       <td>3</td>
-      <td>105.90</td>
-      <td>105</td>
-      <td>106.725</td>
-      <td>107.55</td>
+      <td>93.95</td>
+      <td>10</td>
+      <td>94.400</td>
+      <td>94.85</td>
       <td>105</td>
       <td>0.00</td>
       <td>...</td>
-      <td>0.255</td>
-      <td>198.53</td>
-      <td>1.505</td>
+      <td>0.190</td>
+      <td>210.79</td>
+      <td>1.717</td>
       <td>-0.975</td>
-      <td>0.001</td>
-      <td>-0.158</td>
-      <td>1.625</td>
+      <td>0.002</td>
+      <td>-0.240</td>
+      <td>1.282</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-06 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>115</th>
@@ -1045,23 +1050,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>put</td>
       <td>310.0</td>
       <td>3</td>
-      <td>111.15</td>
-      <td>100</td>
-      <td>111.650</td>
-      <td>112.15</td>
-      <td>100</td>
+      <td>98.90</td>
+      <td>10</td>
+      <td>99.275</td>
+      <td>99.65</td>
+      <td>105</td>
       <td>88.85</td>
       <td>...</td>
-      <td>0.180</td>
-      <td>198.53</td>
-      <td>1.505</td>
-      <td>-0.979</td>
+      <td>0.065</td>
+      <td>210.79</td>
+      <td>1.659</td>
+      <td>-0.983</td>
       <td>0.001</td>
-      <td>-0.132</td>
-      <td>1.391</td>
+      <td>-0.152</td>
+      <td>0.909</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-06 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>116</th>
@@ -1069,23 +1074,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>put</td>
       <td>315.0</td>
       <td>3</td>
-      <td>116.25</td>
-      <td>100</td>
-      <td>116.725</td>
-      <td>117.20</td>
-      <td>100</td>
+      <td>103.65</td>
+      <td>105</td>
+      <td>104.150</td>
+      <td>104.65</td>
+      <td>105</td>
       <td>82.45</td>
       <td>...</td>
-      <td>0.255</td>
-      <td>198.53</td>
-      <td>1.599</td>
-      <td>-0.976</td>
+      <td>0.060</td>
+      <td>210.79</td>
+      <td>1.544</td>
+      <td>-0.992</td>
       <td>0.001</td>
-      <td>-0.162</td>
-      <td>1.570</td>
+      <td>-0.058</td>
+      <td>0.493</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-06 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
     <tr>
       <th>117</th>
@@ -1093,23 +1098,23 @@ Min: 2025-01-06 14:30:00, Max: 2025-05-01 13:30:00
       <td>put</td>
       <td>320.0</td>
       <td>3</td>
-      <td>121.25</td>
-      <td>100</td>
-      <td>121.775</td>
-      <td>122.30</td>
-      <td>100</td>
+      <td>108.90</td>
+      <td>10</td>
+      <td>109.300</td>
+      <td>109.70</td>
+      <td>105</td>
       <td>115.53</td>
       <td>...</td>
-      <td>0.305</td>
-      <td>198.53</td>
-      <td>1.676</td>
-      <td>-0.974</td>
+      <td>0.090</td>
+      <td>210.79</td>
+      <td>1.812</td>
+      <td>-0.982</td>
       <td>0.001</td>
-      <td>-0.183</td>
-      <td>1.673</td>
+      <td>-0.181</td>
+      <td>0.965</td>
       <td>2025-05-16 20:00:00</td>
       <td>2025-01-06 14:30:00</td>
-      <td>2025-05-09 20:00:00</td>
+      <td>2025-05-12 20:00:00</td>
     </tr>
   </tbody>
 </table>
@@ -1148,7 +1153,7 @@ B-S (Black-Scholes)</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6c158e81c5fc704f55e5b858a4abdadda930eec4bfeec61b771ef02eb750dfcc.png" src="../_images/6c158e81c5fc704f55e5b858a4abdadda930eec4bfeec61b771ef02eb750dfcc.png" />
+<img alt="../_images/6ff961aab3473697ddabfaa99d99001c2df147581e3b71eb81ff894704fed8ae.png" src="../_images/6ff961aab3473697ddabfaa99d99001c2df147581e3b71eb81ff894704fed8ae.png" />
 </div>
 </div>
 <p>We have payoffs for call <span class="math notranslate nohighlight">\(C(K) = (S-K)^+\)</span>, where <span class="math notranslate nohighlight">\(S\)</span> is the stock price at expiry, and put <span class="math notranslate nohighlight">\(P(K) = (K-S)^+\)</span></p>
@@ -1168,7 +1173,7 @@ B-S (Black-Scholes)</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/83934cc307c464107c544b3b63600d2bcc5a642aec34340b9aab656331fcdaad.png" src="../_images/83934cc307c464107c544b3b63600d2bcc5a642aec34340b9aab656331fcdaad.png" />
+<img alt="../_images/78d997898edafbf39f5d016052869dd47846804cfeb2c0262bce04c1e1cedda2.png" src="../_images/78d997898edafbf39f5d016052869dd47846804cfeb2c0262bce04c1e1cedda2.png" />
 </div>
 </div>
 <section id="implied-vol">
@@ -1210,7 +1215,7 @@ C_{\text{market}} = C_{\text{Black-Scholes}}(\sigma_{\text{impl}})
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8ee87f4bd2e66189b02c87762628ecf01a8542961b9dbd5aad77384241661f96.png" src="../_images/8ee87f4bd2e66189b02c87762628ecf01a8542961b9dbd5aad77384241661f96.png" />
+<img alt="../_images/3bf9b47dfe205262b66bddfb009d96108bd84e66d9aeae5b4b074b79b4333de6.png" src="../_images/3bf9b47dfe205262b66bddfb009d96108bd84e66d9aeae5b4b074b79b4333de6.png" />
 </div>
 </div>
 <p>Note the convention is to use the IV of OTM calls and OTM puts, so we replot here:</p>
@@ -1238,7 +1243,7 @@ C_{\text{market}} = C_{\text{Black-Scholes}}(\sigma_{\text{impl}})
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d5b74cad4e0c5f08a2e58723a0f7dea3f64e7a53c7d4456c05825579a27cf58d.png" src="../_images/d5b74cad4e0c5f08a2e58723a0f7dea3f64e7a53c7d4456c05825579a27cf58d.png" />
+<img alt="../_images/a31202eeddebeaf52d09eb52cc1e3f767c7646e5d876d20d1b17d2cf3cf14bc8.png" src="../_images/a31202eeddebeaf52d09eb52cc1e3f767c7646e5d876d20d1b17d2cf3cf14bc8.png" />
 </div>
 </div>
 <p>This is somewhat a ‘smile’ structure, as we can see IV is lowest when options have strike equal to current AAPL stock price. IV is higher for OTM calls (strike &gt; underlying), as people buy OTM calls for speculation. IV is also higher for OTM puts (strike &lt; underlying), as institutions which have long positions in stocks often buy OTM puts for hedging / protection.</p>
@@ -1277,7 +1282,7 @@ We verify that by plotting call and put options for AAPL with respect to strike 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/45a0aa956b79420db38c85c0f56c3faabe75b71ddffb99fe785fd8ed0ba959fa.png" src="../_images/45a0aa956b79420db38c85c0f56c3faabe75b71ddffb99fe785fd8ed0ba959fa.png" />
+<img alt="../_images/1b2a038b0cfc952189dc14097be6d46371264419cf4c85cf0e0dad8e82cd8aa0.png" src="../_images/1b2a038b0cfc952189dc14097be6d46371264419cf4c85cf0e0dad8e82cd8aa0.png" />
 </div>
 </div>
 </section>

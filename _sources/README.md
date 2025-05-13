@@ -6,14 +6,22 @@ The website is hosted [here](https://jackxtong.github.io/Data_Science_CW2/), and
 
 ## To use Jupyter-Book:
 
-Simply put jupyter notebooks at root directoy, add them to the `_toc.yml` file.
+Clone my repository, or follow the instructions at [Jupyter-book](https://jupyterbook.org/en/stable/start/your-first-book.html). 
+
+You can create a venv, then activate the venv, and install all dependencies:
+
+```bash
+python3 -m pip install -r requirements.txt`
+```
+
+Then simply put your jupyter notebooks at root directoy, make sure you add them to the `_toc.yml` file, and specify the upstream at `_config.yml`.  
 Building the book locally:
 
 ```bash
 jb build .
 ```
 
-Hosting it online:
+Hosting it online (by pushing to gh-pages branch at your github)
 ```bash
 pip install ghp-import
 ghp-import -n -p -f _build/html

@@ -376,12 +376,17 @@ document.write(`
 <p>The website is hosted <a class="reference external" href="https://jackxtong.github.io/Data_Science_CW2/">here</a>, and published online with Github Pages.</p>
 <section id="to-use-jupyter-book">
 <h2>To use Jupyter-Book:<a class="headerlink" href="#to-use-jupyter-book" title="Link to this heading">#</a></h2>
-<p>Simply put jupyter notebooks at root directoy, add them to the <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> file.
+<p>Clone my repository, or follow the instructions at <a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">Jupyter-book</a>.</p>
+<p>You can create a venv, then activate the venv, and install all dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="sb">`</span>
+</pre></div>
+</div>
+<p>Then simply put your jupyter notebooks at root directoy, make sure you add them to the <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> file, and specify the upstream at <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code>.<br />
 Building the book locally:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jb<span class="w"> </span>build<span class="w"> </span>.
 </pre></div>
 </div>
-<p>Hosting it online:</p>
+<p>Hosting it online (by pushing to gh-pages branch at your github)</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>ghp-import
 ghp-import<span class="w"> </span>-n<span class="w"> </span>-p<span class="w"> </span>-f<span class="w"> </span>_build/html
 </pre></div>
