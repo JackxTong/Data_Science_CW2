@@ -1,0 +1,10 @@
+# Table of contents
+# jb build .
+# ghp-import -n -p -f _build/html
+
+format: jb-book
+root: intro
+chapters:
+- file: brainteasers/intro
+  sections:
+  - file: brainteasers/Consecutive_Heads
