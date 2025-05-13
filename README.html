@@ -181,10 +181,13 @@
         </ul>
         <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="pipeline/intro.html">Intro to Data Pipelines used</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/yfinance.html">SF1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/market_data.html">Look at AAPL call options</a></li>
-
-
+<li class="toctree-l2"><a class="reference internal" href="pipeline/yfinance.html">YFinance Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/market_data.html">Market Data pipeline</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="data_analysis/intro.html">Data analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="data_analysis/Aapl_stock.html">AAPL Stock Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_analysis/Aapl_options.html">AAPL Options Data Analysis</a></li>
 </ul>
 </details></li>
 </ul>
@@ -230,7 +233,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/JackxTong/DS_CW2" target="_blank"
+<a href="https://github.com/JackxTong/Data_Science_CW2" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -350,6 +353,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-use-jupyter-book">To use Jupyter-Book:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functionalities">Functionalities</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-and-analyzing-stock-data">Fetching and analyzing stock data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-and-analyzing-options-data">Fetching and analyzing options data</a></li>
@@ -369,16 +373,29 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="data-science-coursework2">
 <h1>Data Science Coursework2<a class="headerlink" href="#data-science-coursework2" title="Link to this heading">#</a></h1>
 <p>This project is submitted as CW2 to MATH 70076 Data Science at Imperial College London. This is aimed to be an open-source and reproducible data science project, featuring how we can fetch historical stock data of AAPL using data pipeline of, and do data analysis on my personal webpage using the template of <a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">Jupyter-book</a></p>
+<p>The website is hosted <a class="reference external" href="https://jackxtong.github.io/Data_Science_CW2/">here</a>, and published online with Github Pages.</p>
+<section id="to-use-jupyter-book">
+<h2>To use Jupyter-Book:<a class="headerlink" href="#to-use-jupyter-book" title="Link to this heading">#</a></h2>
+<p>Simply put jupyter notebooks at root directoy, add them to the <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> file.
+Building the book locally:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jb<span class="w"> </span>build<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Hosting it online:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>ghp-import
+ghp-import<span class="w"> </span>-n<span class="w"> </span>-p<span class="w"> </span>-f<span class="w"> </span>_build/html
+</pre></div>
+</div>
+</section>
 <section id="functionalities">
 <h2>Functionalities<a class="headerlink" href="#functionalities" title="Link to this heading">#</a></h2>
 <section id="fetching-and-analyzing-stock-data">
 <h3>Fetching and analyzing stock data<a class="headerlink" href="#fetching-and-analyzing-stock-data" title="Link to this heading">#</a></h3>
-<p>data pipeline is yfinance</p>
+<p>The first notebook fetched historical AAPL stock data using free yfinance API. It studies the time series properties of AAPL stock series, analyzing whether it displays the four stylized facts for financial time series.</p>
 </section>
 <section id="fetching-and-analyzing-options-data">
 <h3>Fetching and analyzing options data<a class="headerlink" href="#fetching-and-analyzing-options-data" title="Link to this heading">#</a></h3>
-<p>data pipeline is <a class="reference external" href="https://api.marketdata.app/v1/options/chain/AAPL/">market data</a></p>
-<p>Need to create an account there, get its API token, store in an <code class="docutils literal notranslate"><span class="pre">.env</span></code> file with <code class="docutils literal notranslate"><span class="pre">MARKETDATA_API_KEY</span> <span class="pre">=</span> <span class="pre">REZXXXX</span></code>.</p>
+<p>The second notebook uses data pipeline of <a class="reference external" href="https://api.marketdata.app/v1/options/chain/AAPL/">market data</a>. It studies the distribution of the call options data of AAPL, analyzing whether it agrees with Black-Scholes framework.</p>
 </section>
 </section>
 </section>
@@ -429,6 +446,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-use-jupyter-book">To use Jupyter-Book:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functionalities">Functionalities</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-and-analyzing-stock-data">Fetching and analyzing stock data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-and-analyzing-options-data">Fetching and analyzing options data</a></li>
