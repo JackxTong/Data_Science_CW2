@@ -16,7 +16,6 @@ The goal is to showcase how to:
 ## 📁 Project Structure
 
 ```text
-.
 ├── _build/              # Output folder for the compiled Jupyter Book
 ├── _config.yml          # Jupyter Book configuration
 ├── _toc.yml             # Table of contents for the Jupyter Book
@@ -24,12 +23,17 @@ The goal is to showcase how to:
 ├── intro.md             # Introduction chapter for the Jupyter Book
 ├── logo.png             # Logo used in the book or documentation
 ├── option_data/         # Raw or processed option data used in analysis
-├── pipeline/            # Data processing and transformation pipelines
+├── pipeline/            # Introduction to the usage of pipelines
 ├── references.bib       # Bibliographic references for citations in the book
 ├── requirements.txt     # Python dependencies
 ├── scripts/             # Utility scripts for data preparation
 └── README.md            # Project overview (this file)
 ```
+
+## Book structure
+
+First chapter "Intro to Data Pipelines used" in `pipeline/` introduces how to use the two API.  
+Second chapter "Data analysis" in `data_analysis/` contains the two notebooks using the two APIs for data analysis on the stock and options data of Apple Inc.
 
 ## 🚀 Getting Started
 
